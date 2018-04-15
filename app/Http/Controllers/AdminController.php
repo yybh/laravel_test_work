@@ -12,13 +12,19 @@ use Auth;
 class AdminController extends Controller
 {	
 
-	
-
+	public function __construct()
+    {
+        $this->middleware('auth', [            
+            'except' => []
+        ]);
+    }
 
     public function index(){
-    	if(!Auth::user()->is_admin){
+    	
+   		if(!Auth::user()->is_admin){
        		return redirect()->route('/');
-       }
+       	}
+	   
 
 
     	$b = DB::table('books')->count();
